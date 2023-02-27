@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the Number Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <p id="secretNumber"></p>
+    <label for="">Level</label>
+    <button onclick="setGameLevel('easy')">Easy</button>
+    <button onclick="setGameLevel('medium')">Medium</button>
+    <button onclick="setGameLevel('hard')">hard</button>
+    <button onclick="setGameLevel('imposible')">imposible</button>
+    <br> <br>
+    <label for="">Mode</label>
+    <button onclick="setGameMode('easy')">Easy</button>
+    <button onclick="setGameMode('hard')">Hard</button>
+
+
+    <h1>Loja me numra</h1>
+    <ul id="guessList"></ul>
+    <div id="inputContainer">
+        <input type="text" id="guessInput">
+        <button id="guessButton">Guess</button>
+        <button id="restartButton">Restart the game</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
