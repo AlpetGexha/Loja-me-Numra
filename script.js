@@ -5,15 +5,17 @@ const game = {
     numDigits: 4,
     currentGuess: "",
     gameOver: false,
-    mode: "easy",
 };
 
 function generateNumber() {
     let digits = new Set();
+
     while (digits.size < game.numDigits) {
         digits.add(Math.floor(Math.random() * 10));
     }
+
     game.secret = Array.from(digits).join('');
+
     let secretNumber = document.getElementById('secretNumber');
     secretNumber.innerHTML = `Secret number: ${game.secret}`;
 }
@@ -21,6 +23,7 @@ function generateNumber() {
 function checkGuess() {
     let guessInput = document.getElementById('guessInput');
     let guess = guessInput.value;
+
     if (!isValidGuess(guess)) {
         alert(`Please enter a ${game.numDigits}-digit number with unique digits.`);
         guessInput.value = '';
@@ -39,34 +42,36 @@ function checkGuess() {
 
     game.guesses.push(guess);
     game.currentGuess = guess;
-    let guessResult = getGuessResultMode2(guess);
+    let guessResult;
+
+    if (game.mode == 'hard') {
+        guessResult = getGuessResultMode2(guess);
+    } else {
+        guessResult = getGuessResult(guess);
+    }
+
     let guessList = document.getElementById('guessList');
     let guessItem = document.createElement('li');
+
     guessItem.innerHTML = guessResult;
     guessList.appendChild(guessItem);
+    
     guessInput.value = '';
     guessInput.focus();
+
     if (game.secret === guess) {
         game.gameOver = true;
         let score = calculateScore();
+
         alert(`Congratulations, you win! Your score is ${score}.`);
         restartGame();
     } else if (game.guesses.length >= game.maxGuesses) {
         game.gameOver = true;
         disableGuessing();
+
         alert(`Sorry, you lost. The number was ${game.secret}.`);
         restartGame();
     }
-}
-
-
-function isValidGuess(guess) {
-    let uniqueDigits = new Set(guess);
-    return guess.length === game.numDigits && uniqueDigits.size === game.numDigits;
-}
-
-function isNumric(guess) {
-    return /^\d+$/.test(guess);
 }
 
 function getGuessResult(guess) {
@@ -122,6 +127,7 @@ function getGuessResultMode2(guess) {
 function disableGuessing() {
     let guessButton = document.getElementById('guessButton');
     guessButton.disabled = true;
+
     let guessInput = document.getElementById('guessInput');
     guessInput.disabled = true;
 }
@@ -129,8 +135,10 @@ function disableGuessing() {
 function enableGuessing() {
     let guessButton = document.getElementById('guessButton');
     guessButton.disabled = false;
+
     let guessInput = document.getElementById('guessInput');
     guessInput.disabled = false;
+    
     guessInput.focus();
 }
 
@@ -146,15 +154,6 @@ function restartGame() {
     enableGuessing();
 }
 
-function refreshPage() {
-    location.reload();
-}
-
-function calculateScore() {
-    let score = (game.maxGuesses - game.guesses.length + 1) * 100;
-    return score > 0 ? score : 0;
-}
-
 function setGameLevel(mode) {
     switch (mode) {
         case "easy":
@@ -166,15 +165,15 @@ function setGameLevel(mode) {
             game.maxGuesses = 7;
             break;
         case "hard":
-            game.numDigits = 8;
-            game.maxGuesses = 5;
+            game.numDigits = 6;
+            game.maxGuesses = 4;
             break;
         case "imposible":
-            game.numDigits = 9;
+            game.numDigits = 8;
             game.maxGuesses = 1;
         default:
             game.numDigits = 4;
-            game.maxGuesses = 10;
+            game.maxGuesses = 7;
             break;
     }
     restartGame();
@@ -183,6 +182,24 @@ function setGameLevel(mode) {
 function setGameMode(mode) {
     game.mode = mode;
     restartGame();
+}
+
+function isValidGuess(guess) {
+    let uniqueDigits = new Set(guess);
+    return guess.length === game.numDigits && uniqueDigits.size === game.numDigits;
+}
+
+function isNumric(guess) {
+    return /^\d+$/.test(guess);
+}
+
+function refreshPage() {
+    location.reload();
+}
+
+function calculateScore() {
+    let score = (game.maxGuesses - game.guesses.length + 1) * 100;
+    return score > 0 ? score : 0;
 }
 
 window.onload = function () {
