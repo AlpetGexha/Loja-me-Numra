@@ -16,13 +16,17 @@ function generateNumber() {
 
     game.secret = Array.from(digits).join('');
 
-    let secretNumber = document.getElementById('secretNumber');
-    secretNumber.innerHTML = `Secret number: ${game.secret}`;
+    // let secretNumber = document.getElementById('secretNumber');
+    // secretNumber.innerHTML = `Secret number: ${game.secret}`;
 }
 
 function checkGuess() {
     let guessInput = document.getElementById('guessInput');
     let guess = guessInput.value;
+
+    if (guess.length > game.numDigits) {
+        guess = guess.slice(0, game.numDigits);
+    }
 
     if (!isValidGuess(guess)) {
         alert(`Please enter a ${game.numDigits}-digit number with unique digits.`);
@@ -36,9 +40,6 @@ function checkGuess() {
         return;
     }
 
-    if (guess.length > game.numDigits) {
-        guess = guess.slice(0, game.numDigits);
-    }
 
     game.guesses.push(guess);
     game.currentGuess = guess;
@@ -55,23 +56,31 @@ function checkGuess() {
 
     guessItem.innerHTML = guessResult;
     guessList.appendChild(guessItem);
-    
+
     guessInput.value = '';
     guessInput.focus();
+
 
     if (game.secret === guess) {
         game.gameOver = true;
         let score = calculateScore();
 
-        alert(`Congratulations, you win! Your score is ${score}.`);
+        alert(`Urime, ju fitoni! Rezultati juaj është ${score}.`);
         restartGame();
     } else if (game.guesses.length >= game.maxGuesses) {
         game.gameOver = true;
         disableGuessing();
 
-        alert(`Sorry, you lost. The number was ${game.secret}.`);
+        alert(`Keni humbur. Numri ishte ${game.secret}.`);
         restartGame();
     }
+
+    howMuchLeft();
+}
+
+function howMuchLeft() {
+    document.getElementById('guessLeft').innerHTML = `Ju keni edhe ${game.maxGuesses - game.guesses.length} mundesi.`;
+    document.getElementById('guessDigit').innerHTML = `Numir është me ${game.numDigits} karaktere.`;
 }
 
 function getGuessResult(guess) {
@@ -125,11 +134,9 @@ function getGuessResultMode2(guess) {
 }
 
 function disableGuessing() {
-    let guessButton = document.getElementById('guessButton');
-    guessButton.disabled = true;
+    document.getElementById('guessButton').disabled = true;
 
-    let guessInput = document.getElementById('guessInput');
-    guessInput.disabled = true;
+    document.getElementById('guessInput').disabled = true;
 }
 
 function enableGuessing() {
@@ -138,7 +145,7 @@ function enableGuessing() {
 
     let guessInput = document.getElementById('guessInput');
     guessInput.disabled = false;
-    
+
     guessInput.focus();
 }
 
@@ -152,6 +159,10 @@ function restartGame() {
     let guessList = document.getElementById('guessList');
     guessList.innerHTML = '';
     enableGuessing();
+
+    howMuchLeft();
+    document.getElementById('guessInput').setAttribute('maxlength', game.numDigits);
+
 }
 
 function setGameLevel(mode) {
@@ -207,6 +218,8 @@ window.onload = function () {
 
     let guessButton = document.getElementById('guessButton');
     guessButton.addEventListener('click', checkGuess);
+
+    howMuchLeft();
 
     let guessInput = document.getElementById('guessInput');
     guessInput.setAttribute('maxlength', game.numDigits);

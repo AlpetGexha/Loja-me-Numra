@@ -13,3 +13,104 @@
 .highlight {
     font-weight: bold;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 32px;
+    margin-top: 0;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    width: 50%;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.remaining-guesses {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.message {
+    font-size: 20px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.green {
+    color: green;
+}
+
+.number-list {
+    list-style: none;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.number-list li {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.number-list .guess-number {
+    font-weight: bold;
+}
+
+.number-list .guess-result {
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.guess-number.green {
+    color: green;
+}
+
+.guess-result.yellow {
+    color: yellow;
+}
+
+.guess-result.red {
+    color: red;
+}

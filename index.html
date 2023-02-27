@@ -5,33 +5,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja me Numra</title>
     <link rel="stylesheet" href="style.css">
-
-    <title>Guess the Number Game</title>
 </head>
 
 <body>
-    <p id="secretNumber"></p>
-    <label for="">Level</label>
-    <button onclick="setGameLevel('easy')">Easy</button>
-    <button onclick="setGameLevel('medium')">Medium</button>
-    <button onclick="setGameLevel('hard')">hard</button>
-    <!-- <button onclick="setGameLevel('impossible')">imposible</button> -->
-    <br> <br>
-    <label for="">Mode</label>
-    <button onclick="setGameMode('easy')">Easy</button>
-    <button onclick="setGameMode('hard')">Hard</button>
+    <div class="container">
+        <!-- <p id="secretNumber"></p> -->
+        <label for="">Leveli</label>
+        <button onclick="setGameLevel('easy')">I Lehtë</button>
+        <button onclick="setGameLevel('medium')">I Mesme</button>
+        <button onclick="setGameLevel('hard')">I Vështirë</button>
+        <!-- <button onclick="setGameLevel('impossible')">imposible</button> -->
 
-    <br>
-    <span id="gameMode"></span> <br>
-    <span id="gameLevel"></span>
+        <br> <br>
+        <label for="">Moda</label>
+        <button onclick="setGameMode('easy')">E Leht</button>
+        <button onclick="setGameMode('hard')">E Vështirë</button>
 
-    <h1>Loja me numra</h1>
-    <ul id="guessList"></ul>
-    <div id="inputContainer">
-        <input type="text" id="guessInput">
-        <button id="guessButton">Guess</button>
-        <button id="restartButton">Restart the game</button>
+        <br>
+        <span id="gameMode"></span> <br>
+        <span id="gameLevel"></span>
+
+        <br>
+        <span id="guessLeft"></span><br>
+        <span id="guessDigit"></span>
+
+        <h1>Loja me numra</h1>
+        <ul id="guessList"></ul>
+        <div id="inputContainer">
+            <input type="text" id="guessInput">
+            <button id="guessButton">Qëllo</button>
+            <button id="restartButton">Restarto</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
