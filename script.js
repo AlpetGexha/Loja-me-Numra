@@ -1,8 +1,8 @@
 const game = {
     secret: "",
     guesses: [],
+    numDigits: 3,
     maxGuesses: 10,
-    numDigits: 4,
     currentGuess: "",
     gameOver: false,
     mode: "easy", // Set the default mode
@@ -10,7 +10,7 @@ const game = {
     levels: {
         easy: {
             numDigits: 3,
-            maxGuesses: 10
+            maxGuesses: 10,
         },
         medium: {
             numDigits: 4,
@@ -99,8 +99,8 @@ function checkGuess() {
 }
 
 function howMuchLeft() {
-    document.getElementById('guessLeft').innerHTML = `Ju keni edhe ${game.maxGuesses - game.guesses.length} mundesi.`;
-    document.getElementById('guessDigit').innerHTML = `Numir është me ${game.numDigits} karaktere.`;
+    document.getElementById('guessLeft').innerHTML = `Ju keni edhe <b>${game.maxGuesses - game.guesses.length}</b> mundesi.`;
+    document.getElementById('guessDigit').innerHTML = `Numir është me <b>${game.numDigits}</b> karaktere.`;
 }
 
 function getGuessResult(guess) {
@@ -191,12 +191,41 @@ function setGameLevel(mode) {
     game.numDigits = selectedLevel.numDigits;
     game.maxGuesses = selectedLevel.maxGuesses;
 
+    const levelButtons = document.querySelectorAll('[data-level]');
+    setActiveButton(levelButtons, document.querySelector(`[data-level="${mode}Level"]`));
+
     restartGame();
 }
 
 function setGameMode(mode) {
     game.mode = mode;
+
+    const modeButtons = document.querySelectorAll('[data-mode]');
+    setActiveButton(modeButtons, document.querySelector(`[data-mode="${mode}Mode"]`));
+
     restartGame();
+}
+
+
+function setActiveButton(buttons, selectedButton) {
+    buttons.forEach(button => {
+        if (button === selectedButton) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+}
+
+
+function setDefaultActiveMode() {
+    mode = game.mode
+    const modeButtons = document.querySelectorAll('[data-mode]');
+    setActiveButton(modeButtons, document.querySelector(`[data-mode="${mode}Mode"]`));
+
+    const levelButtons = document.querySelectorAll('[data-level]');
+    setActiveButton(levelButtons, document.querySelector(`[data-level="${mode}Level"]`));
+
 }
 
 function isValidGuess(guess) {
@@ -217,8 +246,10 @@ function calculateScore() {
     return score > 0 ? score : 0;
 }
 
+
 window.onload = function () {
     generateNumber();
+    setDefaultActiveMode();
 
     let guessButton = document.getElementById('guessButton');
     guessButton.addEventListener('click', checkGuess);

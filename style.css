@@ -1,31 +1,18 @@
-.green {
-    color: green;
-}
+:root {
+    --primary: #4CAF50;
+    --primary-active: red;
 
-.yellow {
-    color: yellow;
-}
-
-.red {
-    color: red;
-}
-
-.highlight {
-    font-weight: bold;
+    --app-primary: #fff;
+    --app-secondary: #f2f2f2;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: var(--app-secondary);
 }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+section {
+    margin-bottom: 10px;
 }
 
 h1 {
@@ -48,7 +35,7 @@ button {
     padding: 10px;
     border-radius: 5px;
     border: none;
-    background-color: #4CAF50;
+    background-color: var(--primary);
     color: #fff;
     font-size: 15px;
     cursor: pointer;
@@ -59,29 +46,15 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.remaining-guesses {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.message {
-    font-size: 20px;
-    margin-top: 10px;
-    padding: 10px;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--app-primary);
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.red {
-    color: red;
-}
-
-.yellow {
-    color: yellow;
-}
-
-.green {
-    color: green;
-}
 
 .number-list {
     list-style: none;
@@ -98,19 +71,23 @@ button:disabled {
     font-weight: bold;
 }
 
-.number-list .guess-result {
+.number-list {
     font-style: italic;
     margin-left: 5px;
 }
 
-.guess-number.green {
+.green {
     color: green;
 }
 
-.guess-result.yellow {
+.yellow {
     color: yellow;
 }
 
-.guess-result.red {
+.red {
     color: red;
+}
+
+.active {
+    background-color: var(--primary-active) !important;
 }

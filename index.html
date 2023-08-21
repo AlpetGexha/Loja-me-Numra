@@ -3,33 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja me Numra</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <title>Number Game</title>
 </head>
 
 <body>
-    <div class="container">
-        <!-- <p id="secretNumber"></p> -->
-        <label for="">Leveli</label>
-        <button onclick="setGameLevel('easy')">I Lehtë</button>
-        <button onclick="setGameLevel('medium')">I Mesme</button>
-        <button onclick="setGameLevel('hard')">I Vështirë</button>
-        <!-- <button onclick="setGameLevel('impossible')">imposible</button> -->
+    <section class="container">
+        <section>
+            <label for="">Leveli</label>
+            <button onclick="setGameLevel('easy')" data-level="easyLevel">I Lehtë</button>
+            <button onclick="setGameLevel('medium')" data-level="mediumLevel">I Mesme</button>
+            <button onclick="setGameLevel('hard')" data-level="hardLevel">I Vështirë</button>
 
-        <br> <br>
-        <label for="">Moda</label>
-        <button onclick="setGameMode('easy')">E Leht</button>
-        <button onclick="setGameMode('hard')">E Vështirë</button>
+        </section>
 
-        <br>
-        <span id="gameMode"></span> <br>
-        <span id="gameLevel"></span>
+        <section>
+            <label for="">Moda</label>
+            <button data-mode="easyMode" onclick="setGameMode('easy')">E Leht</button>
+            <button data-mode="hardMode" onclick="setGameMode('hard')">E Vështirë</button>
+        </section>
 
-        <br>
-        <span id="guessLeft"></span><br>
-        <span id="guessDigit"></span>
+        <section>
+            <span id="gameMode"></span>
+            <span id="gameLevel"></span>
+        </section>
+
+        <section>
+            <span id="guessDigit"></span> <br>
+            <span id="guessLeft"></span>
+        </section>
 
         <h1>Loja me numra</h1>
         <ul id="guessList" class="number-list"></ul>
@@ -38,8 +42,7 @@
             <button id="guessButton">Qëllo</button>
             <button id="restartButton">Restarto</button>
         </div>
-    </div>
-    <script src="script.js"></script>
+        </div>
 </body>
 
 </html>
