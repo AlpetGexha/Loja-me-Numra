@@ -5,6 +5,26 @@ const game = {
     numDigits: 4,
     currentGuess: "",
     gameOver: false,
+    mode: "easy", // Set the default mode
+
+    levels: {
+        easy: {
+            numDigits: 3,
+            maxGuesses: 10
+        },
+        medium: {
+            numDigits: 4,
+            maxGuesses: 7
+        },
+        hard: {
+            numDigits: 6,
+            maxGuesses: 4
+        },
+        impossible: {
+            numDigits: 8,
+            maxGuesses: 1
+        },
+    },
 };
 
 function generateNumber() {
@@ -166,27 +186,11 @@ function restartGame() {
 }
 
 function setGameLevel(mode) {
-    switch (mode) {
-        case "easy":
-            game.numDigits = 3;
-            game.maxGuesses = 10;
-            break;
-        case "medium":
-            game.numDigits = 4;
-            game.maxGuesses = 7;
-            break;
-        case "hard":
-            game.numDigits = 6;
-            game.maxGuesses = 4;
-            break;
-        case "imposible":
-            game.numDigits = 8;
-            game.maxGuesses = 1;
-        default:
-            game.numDigits = 4;
-            game.maxGuesses = 7;
-            break;
-    }
+    const selectedLevel = game.levels[mode] || game.levels.medium;
+
+    game.numDigits = selectedLevel.numDigits;
+    game.maxGuesses = selectedLevel.maxGuesses;
+
     restartGame();
 }
 
